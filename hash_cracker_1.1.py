@@ -25,7 +25,6 @@ TYPES_DICT = { 32 : get_algorithm( hashlib.md5 ),
 
 class Control( object ):
     
-    
     def __init__( self ):
         """
            The 3 attributes below are set to None for the purpose
@@ -44,7 +43,6 @@ class Control( object ):
            so that if no match is found the retry() method is called.
         """
         self.user_hash = self.get_hash()
-        
         while self.decrypted_hash == None: 
             self.crack_method = self.get_crack_method()
             
@@ -70,17 +68,13 @@ class Control( object ):
         """
         while True:
             hash_input = input('Please enter the hash: ')
-            
             if hash_input.isalnum(): 
                 length = len( hash_input )
-                
                 if TYPES_DICT.get( length, None ):
                     self.hashtype = TYPES_DICT[length]
                     return hash_input
-
                 else:
                     self.retry('invalid hash')
-            
             else:
                 self.retry('invalid hash')
                     
@@ -92,7 +86,6 @@ class Control( object ):
            method is called. If the file does exist then the words are 
            split into a list and returned to the main() method.
         """
-        
         while self.user_file == None:
             self.filename = input('Please enter the name of the wordlist: ')
             
@@ -123,7 +116,7 @@ class Control( object ):
                 self.retry('invalid option')
             
     
-    def dict_attack(  self):
+    def dict_attack(  self ):
         """
            Loops through the wordlist, converting each word to the correct
            hashtype and comparing to the hash that needs to be cracked.
@@ -179,5 +172,5 @@ class Control( object ):
                     
                     
 if __name__ == "__main__":
-    run_it = Control()
-    run_it.main()
+    run = Control()
+    run.main()
